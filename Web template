@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyblade X Store | 香港爆旋陀螺專門店</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e9ecef;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .top-bar {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #000;
+    }
+    .logo span {
+      color: #e63946;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .nav-links a:hover {
+      color: #e63946;
+    }
+    .nav-icons {
+      display: flex;
+      gap: 15px;
+      font-size: 1.1rem;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Category Filter Bar */
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 25px 20px 10px;
+      flex-wrap: wrap;
+    }
+    .cat-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 8px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    .cat-btn.active, .cat-btn:hover {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    /* Main Product Grid */
+    .container {
+      max-width: 1200px;
+      margin: 20px auto 50px;
+      padding: 0 20px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 25px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #e63946;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+    .badge.instock {
+      background: #2a9d8f;
+    }
+    .product-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background: #eee;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .product-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #222;
+      line-height: 1.4;
+    }
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #e63946;
+      margin-bottom: 12px;
+    }
+    .btn-add {
+      width: 100%;
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-add:hover {
+      background: #333;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #aaa;
+      padding: 40px 20px 20px;
+      margin-top: auto;
+      font-size: 0.88rem;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .footer-col h4 {
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
+    .footer-bottom {
+      border-top: 1px solid #222;
+      text-align: center;
+      padding-top: 20px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    ⚡ 全店滿 HK$500 免運費 | 順豐速運 / 順豐智能櫃配送 ⚡
+  </div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">BEY<span>X</span>STORE</div>
+      <ul class="nav-links">
+        <li><a href="#">首頁</a></li>
+        <li><a href="#">BX / UX 主體</a></li>
+        <li><a href="#">配件/發射器</a></li>
+        <li><a href="#">現貨區</a></li>
+        <li><a href="#">關於我們</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="#">🔍</a>
+        <a href="#">🛒 (0)</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>BEYBLADE X 官方/二手商品專門店</h1>
+    <p>嚴選日本正版現貨 · 隨機強化包拆封確認款 · 必備配件</p>
+  </section>
+
+  <!-- Category Filter Buttons -->
+  <div class="categories">
+    <button class="cat-btn active">全部商品 All</button>
+    <button class="cat-btn">🔥 現貨區 IN-STOCK</button>
+    <button class="cat-btn">陀螺 BX/UX</button>
+    <button class="cat-btn">發射器 / 握把</button>
+    <button class="cat-btn">二手中古區</button>
+  </div>
+
+  <!-- Product Listing -->
+  <main class="container">
+    <div class="product-grid">
+
+      <!-- Product Card 1 -->
+      <div class="product-card">
+        <span class="badge">HOT 熱銷</span>
+        <img class="product-img" src="https://via.placeholder.com/300x300?text=UX-01+DranDagger" alt="Beyblade UX-01">
+        <div class="product-info">
+          <div class="product-title">BEYBLADE X UX-01 蒼龍之刃 Dran Dagger 4-60R</div>
+          <div class="product-price">HK$ 128.00</div>
+          <button class="btn-add">加入購物車</button>
+        </div>
+      </div>
+
+      <!-- Product Card 2 -->
+      <div class="product-card">
+        <span class="badge instock">現貨</span>
+        <img class="product-img" src="https://via.placeholder.com/300x300?text=BX-18+String+Launcher" alt="String Launcher">
+        <div class="product-info">
+          <div class="product-title">BX-18 官方黑白拉線發射器 String Launcher</div>
+          <div class="product-price">HK$ 68.00</div>
+          <button class="btn-add">加入購物車</button>
+        </div>
+      </div>
+
+      <!-- Product Card 3 -->
+      <div class="product-card">
+        <span class="badge">預訂款</span>
+        <img class="product-img" src="https://via.placeholder.com/300x300?text=BX-00+HellsScythe" alt="Hells Scythe">
+        <div class="product-info">
+          <div class="product-title">BX-00 地獄鐮刀 Hells Scythe 4-60T (特別配色)</div>
+          <div class="product-price">HK$ 198.00</div>
+          <button class="btn-add">預訂商品</button>
+        </div>
+      </div>
+
+      <!-- Product Card 4 -->
+      <div class="product-card">
+        <span class="badge instock">現貨</span>
+        <img class="product-img" src="https://via.placeholder.com/300x300?text=Launcher+Grip" alt="Launcher Grip">
+        <div class="product-info">
+          <div class="product-title">BEYBLADE X 發射器握把 Launcher Grip (黑色)</div>
+          <div class="product-price">HK$ 48.00</div>
+          <button class="btn-add">加入購物車</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>關於我們</h4>
+        <p>提供最新、最齊全的 Beyblade X 陀螺及配件選購，香港本地寄送。</p>
+      </div>
+      <div class="footer-col">
+        <h4>顧客服務</h4>
+        <ul>
+          <li><a href="#">常見問題 Q&A</a></li>
+          <li><a href="#">送貨方式及說明</a></li>
+          <li><a href="#">退換貨政策</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>聯絡我們</h4>
+        <ul>
+          <li>WhatsApp: +852 9123 4567</li>
+          <li>Instagram: @beyx_store_hk</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 BEYXSTORE. All rights reserved. Powered by HTML & CSS.
+    </div>
+  </footer>
+
+</body>
+</html>

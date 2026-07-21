@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N_BEYBLADEX | 香港爆旋陀螺二手專門店</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e9ecef;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .top-bar {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #000;
+    }
+    .logo span {
+      color: #e63946;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .nav-links a:hover {
+      color: #e63946;
+    }
+    .nav-icons {
+      display: flex;
+      gap: 15px;
+      font-size: 1.1rem;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Category Filter Bar */
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 25px 20px 10px;
+      flex-wrap: wrap;
+    }
+    .cat-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 8px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    .cat-btn.active, .cat-btn:hover {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    /* Main Product Grid */
+    .container {
+      max-width: 1200px;
+      margin: 20px auto 50px;
+      padding: 0 20px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 25px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #e63946;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+    .badge.used {
+      background: #4a5568;
+    }
+    .badge.like-new {
+      background: #2b6cb0;
+    }
+    .product-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background: #eee;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .product-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #222;
+      line-height: 1.4;
+    }
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #e63946;
+      margin-bottom: 12px;
+    }
+    .btn-view {
+      width: 100%;
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-view:hover {
+      background: #e63946;
+    }
+
+    /* Product Detail Overlay (Modal) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      width: 100%;
+      max-width: 700px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    @media (max-width: 600px) {
+      .modal-content {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #888;
+      line-height: 1;
+    }
+    .modal-close:hover {
+      color: #000;
+    }
+    .modal-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #eee;
+    }
+    .modal-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .modal-price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #e63946;
+      margin-bottom: 15px;
+    }
+    .modal-desc {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    .modal-condition {
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #334155;
+      margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #aaa;
+      padding: 40px 20px 20px;
+      margin-top: auto;
+      font-size: 0.88rem;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .footer-col h4 {
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
+    .footer-bottom {
+      border-top: 1px solid #222;
+      text-align: center;
+      padding-top: 20px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    ⚡ N_BEYBLADEX 二手爆旋陀螺專門店 | 香港本地發貨 · 順豐到付 / 面交 ⚡
+  </div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">N_BEYBLADE<span>X</span></div>
+      <ul class="nav-links">
+        <li><a href="#">首頁</a></li>
+        <li><a href="#">二手 BX / UX</a></li>
+        <li><a href="#">二手配件/發射器</a></li>
+        <li><a href="#">關於我們</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="#">🔍</a>
+        <a href="#">🛒 (0)</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>N_BEYBLADEX 二手爆旋陀螺專門店</h1>
+    <p>嚴選日本正版中古陀螺 · 拆件單賣 · 狀態良好性價比高</p>
+  </section>
+
+  <!-- Category Filter Buttons -->
+  <div class="categories">
+    <button class="cat-btn active">全部二手商品 All</button>
+    <button class="cat-btn">9成新以上 Like New</button>
+    <button class="cat-btn">二手 BX/UX 陀螺</button>
+    <button class="cat-btn">發射器 / 握把</button>
+    <button class="cat-btn">特價散件區</button>
+  </div>
+
+  <!-- Product Listing Grid -->
+  <main class="container">
+    <div class="product-grid">
+
+      <!-- Product Card 1 -->
+      <div class="product-card" onclick="openModal('BEYBLADE X UX-01 蒼龍之刃 Dran Dagger 4-60R (二手)', 'HK$ 88.00', '9成新 (僅試轉過幾次，無明顯對戰撞痕，含原裝發射器與配件)', '9成新', 'https://via.placeholder.com/400x400?text=UX-01+DranDagger')">
+        <span class="badge like-new">9成新</span>
+        <img class="product-img" src="https://via.placeholder.com/300x300?text=UX-01+DranDagger" alt="Beyblade UX-01">
+        <div class="product-info">
+          <div class="product-title">UX-01 蒼龍之刃 Dran Dagger 4-60R</div>
+          <div class="product-price">HK$ 88.00</div>
+          <button class="btn-view">查看詳情</button>
+        </div>
+      </div>
+
+      <!-- Product Card 2 -->
+      <div class="product-card" onclick="openModal('BX-18 黑白拉線發射器 String Launcher (二手)', 'HK$ 45.00', '85成新 (拉線順暢，功能完全正常，表面有些微使用痕跡)', '85成新', 'https://via.placeholder.com/400x400?text=BX-18+Launcher')">
+        <span class="badge used">二手良好</span>
+        <img class="product-img" src="https://via.placeholder.com/300x300?text=BX-18+Launcher" alt="String Launcher">
+        <div class="product-info">
+          <div class="product-title">BX-18 黑白拉線發射器 String Launcher</div>
+          <div class="product-price">HK$ 45.00</div>
+          <button class="btn-view">查看詳情</button>
+        </div>
+      </div>
+
+      <!-- Product Card 3 -->
+      <div class="product-card" onclick="openModal('BX-00 地獄鐮刀 Hells Scythe 4-60T 特別配色 (二手裸陀螺)', 'HK$ 120.00', '95成新 (收藏品出讓，金屬環無氧化，未用於正式對戰)', '95成新', 'https://via.placeholder.com/400x400?text=BX-00+HellsScythe')">
+        <span class="badge like-new">近全新</span>
+        <img class="product-img" src="https://via.placeholder.com/300x300?text=BX-00+HellsScythe" alt="Hells Scythe">
+        <div class="product-info">
+          <div class="product-title">BX-00 地獄鐮刀 Hells Scythe 4-60T</div>
+          <div class="product-price">HK$ 120.00</div>
+          <button class="btn-view">查看詳情</button>
+        </div>
+      </div>
+
+      <!-- Product Card 4 -->
+      <div class="product-card" onclick="openModal('BEYBLADE X 發射器握把 Launcher Grip 黑色 (二手)', 'HK$ 30.00', '8成新 (扣位完好無鬆脫，正常戰鬥磨損)', '8成新', 'https://via.placeholder.com/400x400?text=Launcher+Grip')">
+        <span class="badge used">二手</span>
+        <img class="product-img" src="https://via.placeholder.com/300x300?text=Launcher+Grip" alt="Launcher Grip">
+        <div class="product-info">
+          <div class="product-title">發射器握把 Launcher Grip (黑色)</div>
+          <div class="product-price">HK$ 30.00</div>
+          <button class="btn-view">查看詳情</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Product Detail Modal Overlay -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <img class="modal-img" id="mImg" src="" alt="Product Image">
+      <div class="modal-details">
+        <div>
+          <div class="modal-title" id="mTitle">商品名稱</div>
+          <div class="modal-price" id="mPrice">HK$ 0.00</div>
+          <div class="modal-condition" id="mCondition">成色狀況：85成新</div>
+          <div class="modal-desc" id="mDesc">詳細描述預設文字...</div>
+        </div>
+        <button class="btn-view" style="background:#25D366;" onclick="alert('請截圖聯絡賣家進行購買！')">📱 WhatsApp 查詢 / 購買</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>關於 N_BEYBLADEX</h4>
+        <p>專營香港二手正版 Beyblade X 陀螺、配件及發射器買賣，為玩家提供高性價比選擇。</p>
+      </div>
+      <div class="footer-col">
+        <h4>交易須知</h4>
+        <ul>
+          <li><a href="#">二手成色判定標準</a></li>
+          <li><a href="#">面交 / 順豐速運說明</a></li>
+          <li><a href="#">退換貨及售後政策</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>聯絡賣家</h4>
+        <ul>
+          <li>WhatsApp: +852 9123 4567</li>
+          <li>Instagram: @n_beybladex</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 N_BEYBLADEX. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- JavaScript for Product Modal Popup -->
+  <script>
+    function openModal(title, price, desc, condition, imgSrc) {
+      document.getElementById('mTitle').innerText = title;
+      document.getElementById('mPrice').innerText = price;
+      document.getElementById('mDesc').innerText = desc;
+      document.getElementById('mCondition').innerText = '成色評級：' + condition;
+      document.getElementById('mImg').src = imgSrc;
+      document.getElementById('productModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('productModal').classList.remove('active');
+    }
+
+    // Close modal if user clicks outside the modal box
+    window.onclick = function(event) {
+      const modal = document.getElementById('productModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+</body>
+</html>

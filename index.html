@@ -29,15 +29,50 @@
     }
 
     /* Top Announcement Bar - Light Brown / Warm Taupe Theme */
-    .top-bar {
-      background-color: #9A7B66;
-      color: #ffffff;
-      text-align: center;
-      padding: 10px 15px;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-      font-weight: 400;
-    }
+    /* NEW SLIDING TOP BAR CSS */
+.top-bar {
+  background-color: #9A7B66;
+  color: #ffffff;
+  text-align: center;
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+}
+
+.top-bar-slider {
+  height: 100%;
+  position: relative;
+}
+
+.top-bar-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  cursor: pointer;
+}
+
+/* Active Slide Effect */
+.top-bar-slide.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide Out Effect */
+.top-bar-slide.exit {
+  opacity: 0;
+  transform: translateY(-100%);
+}
 
     /* Header & Navigation */
     header {

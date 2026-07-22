@@ -681,6 +681,34 @@
 
   <!-- JavaScript Controls -->
   <script>
+    // Auto-Changing Top Announcement Bar
+let currentSlideIndex = 0;
+const slides = document.querySelectorAll('.top-bar-slide');
+
+function rotateTopBarSlides() {
+  if (slides.length <= 1) return;
+
+  // Current active slide exits moving up
+  const currentSlide = slides[currentSlideIndex];
+  currentSlide.classList.remove('active');
+  currentSlide.classList.add('exit');
+
+  // Move to next slide index
+  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+  const nextSlide = slides[currentSlideIndex];
+
+  // Clean up exit class after transition
+  setTimeout(() => {
+    currentSlide.classList.remove('exit');
+  }, 500);
+
+  // Bring in the next slide
+  nextSlide.classList.add('active');
+}
+
+// Change message every 4 seconds (4000 ms)
+setInterval(rotateTopBarSlides, 4000);
+    
     // Menu Drawer Controls
     function openDrawer() {
       document.getElementById('drawer').classList.add('active');

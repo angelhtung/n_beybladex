@@ -4,23 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>N_BEYBLADEX | 二手爆旋陀螺專門店</title>
-  <!-- Rockwell Style Google Font -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&family=Arvo:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      /* Rockwell Nova Light for English + 圓體 for Chinese */
-      font-family: "Rockwell Nova Light", "Rockwell Nova", "Rockwell", "Hiragino Maru Gothic ProN", "Yuanti SC", "圓體", serif;
-      font-weight: 300; /* Keeps English text in a clean Light weight */
+      font-family: 'Montserrat', "Hiragino Maru Gothic ProN", "Yuanti SC", "圓體", sans-serif;
     }
     body {
-      background-color: #f3f4f6;
-      color: #1f2937;
+      background-color: #ffffff;
+      color: #333333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -30,77 +28,71 @@
       color: inherit;
     }
 
-    /* Header & Navigation Layout */
+    /* Top Announcement Bar - Light Brown / Warm Taupe Theme */
+    .top-bar {
+      background-color: #9A7B66;
+      color: #ffffff;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+    }
+
+    /* Header & Navigation */
     header {
       background: #ffffff;
-      border-bottom: 2px solid #e5e7eb;
       position: sticky;
       top: 0;
       z-index: 1000;
-    }
-    .top-bar {
-      background: linear-gradient(135deg, #374151, #1f2937);
-      color: #f9fafb;
-      text-align: center;
-      padding: 8px 12px;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-      font-weight: 500;
+      border-bottom: 1px solid #f0f0f0;
     }
     .nav-container {
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      padding: 12px 20px;
+      padding: 18px 24px;
     }
 
-    /* Top Left Buttons */
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .btn-menu, .btn-icon {
-      background: transparent;
-      border: none; 
-      color: #374151;
-      padding: 6px 10px;
-      cursor: pointer;
-      font-size: 0.95rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
-    }
-    .btn-menu:hover, .btn-icon:hover {
-      background: transparent; 
-      color: #111827;
-    }
-
-    /* Top Center Logo */
-    .nav-center {
-      text-align: center;
-    }
+    /* Top Left Logo */
     .logo {
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #111827;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #333333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .logo span {
-      color: #ef4444;
+    .logo-icon {
+      font-size: 1.5rem;
     }
 
+    /* Top Right Controls */
     .nav-right {
       display: flex;
-      justify-content: flex-end;
+      align-items: center;
+      gap: 18px;
+    }
+    .btn-icon {
+      background: transparent;
+      border: none; 
+      color: #333333;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      transition: opacity 0.2s;
+    }
+    .btn-icon:hover {
+      opacity: 0.7;
     }
 
-    /* Slide-out Menu Drawer ( Drawer) */
+    /* Slide-out Menu Drawer */
     .drawer-overlay {
       display: none;
       position: fixed;
@@ -108,7 +100,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(17, 24, 39, 0.6);
+      background: rgba(0, 0, 0, 0.4);
       z-index: 2000;
     }
     .drawer-overlay.active {
@@ -117,197 +109,224 @@
     .drawer {
       position: fixed;
       top: 0;
-      left: -320px;
+      right: -320px; /* Opens from right side */
       width: 300px;
       height: 100%;
       background: #ffffff;
       z-index: 2001;
-      box-shadow: 4px 0 15px rgba(0,0,0,0.15);
-      transition: left 0.3s ease;
+      box-shadow: -4px 0 15px rgba(0,0,0,0.08);
+      transition: right 0.3s ease;
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 24px;
     }
     .drawer.active {
-      left: 0;
+      right: 0;
     }
     .drawer-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-bottom: 15px;
-      border-bottom: 1px solid #e5e7eb;
-      margin-bottom: 15px;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 20px;
     }
     .drawer-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #111827;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
     }
     .drawer-close {
       font-size: 1.5rem;
       cursor: pointer;
-      color: #9ca3af;
-    }
-    .drawer-close:hover {
-      color: #111827;
+      color: #888;
     }
     .drawer-links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
     }
     .drawer-links li a {
       display: block;
-      padding: 10px 12px;
-      border-radius: 6px;
-      font-weight: 600;
-      color: #374151;
-      transition: background 0.2s, color 0.2s;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #444444;
+      transition: color 0.2s;
     }
     .drawer-links li a:hover {
-      background: #f3f4f6;
-      color: #ef4444;
+      color: #9A7B66;
     }
-    
-    /* Language Switcher Section in Drawer */
     .drawer-lang {
       margin-top: auto;
-      padding-top: 15px;
-      border-top: 1px solid #e5e7eb;
+      padding-top: 20px;
+      border-top: 1px solid #f0f0f0;
     }
     .drawer-lang label {
       display: block;
-      font-size: 0.85rem;
-      color: #6b7280;
+      font-size: 0.8rem;
+      color: #777;
       margin-bottom: 8px;
-      font-weight: 600;
     }
     .drawer-lang select {
       width: 100%;
-      padding: 8px 12px;
-      border-radius: 6px;
-      border: 1px solid #d1d5db;
-      background: #f9fafb;
-      font-weight: 600;
-      color: #374151;
+      padding: 8px 10px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      background: #fdfdfd;
+      color: #333;
+      font-size: 0.85rem;
     }
 
-    /* Hero Banner - Metallic Theme */
-    .hero {
-      background: linear-gradient(rgba(31, 41, 55, 0.75), rgba(55, 65, 81, 0.85)), url('https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-      color: #fff;
-      text-align: center;
-      padding: 80px 20px;
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      letter-spacing: 1.5px;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-
-    /* Category Filter Bar */
-    .categories {
+    /* Page Heading & Filters Bar */
+    .page-header {
+      max-width: 1300px;
+      margin: 30px auto 10px;
+      padding: 0 24px;
       display: flex;
-      justify-content: center;
-      gap: 12px;
-      padding: 30px 20px 10px;
+      justify-content: space-between;
+      align-items: flex-end;
       flex-wrap: wrap;
+      gap: 15px;
     }
-    .cat-btn {
-      background: #ffffff;
-      border: 1px solid #d1d5db;
-      color: #374151;
-      padding: 9px 20px;
-      border-radius: 20px;
+    .page-title-group {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .page-title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: #222222;
+      text-transform: uppercase;
+    }
+    .product-count {
+      font-size: 0.85rem;
+      color: #888888;
+      font-weight: 400;
+    }
+    .filter-controls {
+      display: flex;
+      gap: 15px;
+    }
+    .select-control {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 4px 20px 4px 4px;
+      font-size: 0.85rem;
+      color: #555555;
+      background: transparent;
+      outline: none;
       cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 0.25s ease;
-    }
-    .cat-btn.active, .cat-btn:hover {
-      background: linear-gradient(135deg, #4b5563, #1f2937);
-      color: #ffffff;
-      border-color: #1f2937;
     }
 
-    /* Main Product Grid */
+    /* Main Product Grid - Minimalist Photo Focused */
     .container {
-      max-width: 1200px;
-      margin: 20px auto 50px;
-      padding: 0 20px;
+      max-width: 1300px;
+      margin: 20px auto 80px;
+      padding: 0 24px;
     }
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px 20px;
     }
     .product-card {
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
       position: relative;
       cursor: pointer;
     }
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    
+    /* Image Container & Sold Out / Tag Overlays */
+    .img-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* 1:1 Aspect Ratio Square */
+      background: #f7f7f7;
+      overflow: hidden;
+      margin-bottom: 14px;
     }
-    .badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: #ef4444;
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: bold;
-      padding: 4px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      z-index: 10;
-    }
-    .badge.used { background: #6b7280; }
-    .badge.like-new { background: #2563eb; }
     .product-img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 240px;
+      height: 100%;
       object-fit: cover;
-      background: #f3f4f6;
+      transition: transform 0.4s ease;
     }
-    .product-info { padding: 15px; }
-    .product-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #1f2937;
-      line-height: 1.4;
+    .product-card:hover .product-img {
+      transform: scale(1.03);
     }
-    .product-price {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #dc2626;
-      margin-bottom: 12px;
-    }
-    .btn-view {
-      width: 100%;
-      background: linear-gradient(135deg, #4b5563, #1f2937);
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
+    .sold-out-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(150, 150, 150, 0.85);
+      color: #ffffff;
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    /* Product Detail Overlay (Modal) */
+    /* Product Info Formatting */
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 5px;
+      flex-grow: 1;
+    }
+    .product-title {
+      font-size: 0.85rem;
+      color: #444444;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+    .product-price {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #333333;
+      margin-bottom: 16px;
+    }
+    .original-price {
+      text-decoration: line-through;
+      color: #aaa;
+      font-size: 0.85rem;
+      font-weight: 300;
+      margin-top: 3px;
+    }
+
+    /* Bottom Minimalist Cart Button */
+    .btn-cart-icon {
+      width: 100%;
+      background: #F6F5F3;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.2s;
+      margin-top: auto;
+    }
+    .btn-cart-icon:hover {
+      background: #EAE8E3;
+    }
+    .btn-cart-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: #666666;
+    }
+
+    /* Product Detail Overlay Modal */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -315,7 +334,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(17, 24, 39, 0.7);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 2000;
       justify-content: center;
       align-items: center;
@@ -325,8 +344,8 @@
     .modal-content {
       background: #fff;
       width: 100%;
-      max-width: 700px;
-      border-radius: 10px;
+      max-width: 650px;
+      border-radius: 6px;
       overflow: hidden;
       position: relative;
       display: grid;
@@ -341,131 +360,149 @@
       position: absolute;
       top: 10px;
       right: 15px;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       cursor: pointer;
-      color: #9ca3af;
+      color: #aaa;
     }
     .modal-img {
       width: 100%;
       height: 250px;
       object-fit: cover;
-      border-radius: 6px;
-      background: #f3f4f6;
+      border-radius: 4px;
+      background: #f7f7f7;
     }
     .modal-details { display: flex; flex-direction: column; justify-content: space-between; }
-    .modal-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
-    .modal-price { font-size: 1.3rem; font-weight: 800; color: #dc2626; margin-bottom: 12px; }
-    .modal-desc { font-size: 0.9rem; color: #4b5563; line-height: 1.5; margin-bottom: 15px; }
+    .modal-title { font-size: 1rem; font-weight: 500; margin-bottom: 10px; color: #333; }
+    .modal-price { font-size: 1.1rem; font-weight: 600; color: #333; margin-bottom: 12px; }
+    .modal-desc { font-size: 0.85rem; color: #666; line-height: 1.6; margin-bottom: 15px; }
     .modal-condition {
-      background: #f3f4f6;
-      padding: 8px 12px;
+      background: #F6F5F3;
+      padding: 6px 10px;
       border-radius: 4px;
-      font-size: 0.85rem;
-      color: #374151;
-      font-weight: 600;
+      font-size: 0.8rem;
+      color: #555;
       margin-bottom: 15px;
     }
+    .btn-contact {
+      width: 100%;
+      background: #9A7B66;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-contact:hover { opacity: 0.9; }
 
-    /* Footer */
+    /* Footer Styles */
     footer {
-      background: linear-gradient(135deg, #1f2937, #111827);
-      color: #9ca3af;
-      padding: 40px 20px 20px;
+      background: #F6F5F3;
+      color: #666666;
+      padding: 40px 24px 20px;
       margin-top: auto;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
+      border-top: 1px solid #eaeaea;
     }
     .footer-container {
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 30px;
       margin-bottom: 30px;
     }
-    .footer-col h4 { color: #f9fafb; margin-bottom: 15px; font-size: 1rem; }
+    .footer-col h4 { color: #333333; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 8px; }
     .footer-bottom {
-      border-top: 1px solid #374151;
+      border-top: 1px solid #e0e0e0;
       text-align: center;
       padding-top: 20px;
-      font-size: 0.8rem;
+      color: #999999;
+      font-size: 0.78rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
+  <!-- Top Announcement Bar (Light Brown Theme) -->
   <div class="top-bar">
-    ⚡ N_BEYBLADEX 二手爆旋陀螺專門店 | 香港本地發貨 · 順豐到付 / 面交 ⚡
+    Follow Our IG shop 隨時抽 Beyblade X 限量配件!! (click me)
   </div>
 
   <!-- Header Navigation -->
   <header>
     <div class="nav-container">
-      <!-- Top Left: Menu  & Search Buttons -->
-      <div class="nav-left">
-        <button class="btn-menu" onclick="openDrawer()">
-          ☰ 
-        </button>
-        <button class="btn-icon" onclick="alert('請輸入欲搜尋的陀螺名稱')">
-          🔍 
-        </button>
-      </div>
+      <!-- Store Logo Left -->
+      <a href="#" class="logo">
+        <span class="logo-icon">🦄</span> N_BEYBLADEX
+      </a>
 
-      <!-- Top Center: Store Logo -->
-      <div class="nav-center">
-        <a href="#" class="logo">N_BEYBLADE<span>X</span></a>
-      </div>
-
-      <!-- Top Right: Shopping Cart Icon -->
+      <!-- Controls Right (Search, User, Cart, Menu) -->
       <div class="nav-right">
-        <button class="btn-icon">
-          🛒 (0)
+        <button class="btn-icon" onclick="alert('請輸入欲搜尋的商品名稱')" title="Search">
+          🔍
+        </button>
+        <button class="btn-icon" onclick="alert('會員功能')" title="Account">
+          👤
+        </button>
+        <button class="btn-icon" title="Cart">
+          🛍️
+        </button>
+        <button class="btn-icon" onclick="openDrawer()" title="Menu">
+          ☰
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Slide-Out Menu Drawer  -->
+  <!-- Slide-Out Menu Drawer -->
   <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
   <div class="drawer" id="drawer">
     <div class="drawer-header">
-      <div class="drawer-title"> Menu</div>
+      <div class="drawer-title">MENU</div>
       <span class="drawer-close" onclick="closeDrawer()">&times;</span>
     </div>
     <ul class="drawer-links">
-      <li><a href="#" onclick="closeDrawer(); filterCategory('all');">HOME</a></li>
-      <li><a href="#" onclick="closeDrawer(); filterCategory('like-new');">New Arrival</a></li>
-      <li><a href="#" onclick="closeDrawer(); filterCategory('all');">現貨區 IN-STOCK ITEMS</a></li>
-      <li><a href="#" onclick="closeDrawer(); filterCategory('beyblade');">熱銷產品 HOT ITEMS</a></li>
-      <li><a href="#" onclick="closeDrawer(); alert('如有問題請截圖 WhatsApp 查詢！');">常見問題 Q&A</a></li>
-      <li><a href="#" onclick="closeDrawer(); filterCategory('parts');">OTHERS</a></li>
+      <li><a href="#" onclick="closeDrawer(); filterCategory('all');">VIEW ALL 全部商品</a></li>
+      <li><a href="#" onclick="closeDrawer(); filterCategory('like-new');">NEW ARRIVALS 新品推薦</a></li>
+      <li><a href="#" onclick="closeDrawer(); filterCategory('beyblade');">BEYBLADE X 陀螺區</a></li>
+      <li><a href="#" onclick="closeDrawer(); filterCategory('launcher');">LAUNCHERS 發射器/握把</a></li>
+      <li><a href="#" onclick="closeDrawer(); filterCategory('parts');">PARTS 特價散件區</a></li>
+      <li><a href="#" onclick="closeDrawer(); alert('如有問題請截圖 WhatsApp 查詢！');">Q&A 常見問題</a></li>
     </ul>
 
-    <!-- Choose Language Selector -->
+    <!-- Language Selector -->
     <div class="drawer-lang">
-      <label for="langSelect">Choose Language / 選擇語言:</label>
+      <label for="langSelect">Language / 語言:</label>
       <select id="langSelect" onchange="alert('Language changed to: ' + this.value)">
-        <option value="zh-HK">繁體中文 (Chinese)</option>
+        <option value="zh-HK">繁體中文</option>
         <option value="en">English</option>
       </select>
     </div>
   </div>
 
-  <!-- Hero Banner -->
-  <section class="hero">
-    <h1>N_BEYBLADEX 二手爆旋陀螺專門店</h1>
-    <p>嚴選日本正版中古陀螺 · 拆件單賣 · 狀態良好性價比高</p>
-  </section>
-
-  <!-- Category Filter Buttons -->
-  <div class="categories">
-    <button class="cat-btn active" onclick="filterCategory('all', this)">全部二手商品 All</button>
-    <button class="cat-btn" onclick="filterCategory('like-new', this)">9成新以上 Like New</button>
-    <button class="cat-btn" onclick="filterCategory('beyblade', this)">二手 BX/UX 陀螺</button>
-    <button class="cat-btn" onclick="filterCategory('launcher', this)">發射器 / 握把</button>
-    <button class="cat-btn" onclick="filterCategory('parts', this)">特價散件區</button>
+  <!-- Page Title & Sort Filters Bar -->
+  <div class="page-header">
+    <div class="page-title-group">
+      <h1 class="page-title">VIEW ALL</h1>
+      <span class="product-count" id="itemCount">5 products</span>
+    </div>
+    <div class="filter-controls">
+      <select class="select-control" onchange="filterCategory(this.value)">
+        <option value="all">Sort by: Featured</option>
+        <option value="like-new">9成新以上</option>
+        <option value="beyblade">陀螺正體</option>
+        <option value="launcher">發射器 / 配件</option>
+      </select>
+      <select class="select-control">
+        <option>24 Items per page</option>
+        <option>48 Items per page</option>
+      </select>
+    </div>
   </div>
 
   <!-- Main Product Grid -->
@@ -473,58 +510,77 @@
     <div class="product-grid" id="productGrid">
 
       <!-- Product Card 1 -->
-      <div class="product-card" data-category="like-new beyblade" onclick="openModal('BEYBLADE X UX-01 蒼龍之刃 Dran Dagger 4-60R (二手)', 'HK$ 88.00', '9成新 (僅試轉過幾次，無明顯對戰撞痕，含原裝發射器與配件)', '9成新', 'https://via.placeholder.com/400x400?text=UX-01+DranDagger')">
-        <span class="badge like-new">9成新</span>
-        <img class="product-img" src="https://via.placeholder.com/300x300?text=UX-01+DranDagger" alt="Beyblade UX-01">
-        <div class="product-info">
-          <div class="product-title">UX-01 蒼龍之刃 Dran Dagger 4-60R</div>
-          <div class="product-price">HK$ 88.00</div>
-          <button class="btn-view">查看詳情</button>
+      <div class="product-card" data-category="like-new beyblade" onclick="openModal('「IN STOCK!」 BEYBLADE X UX-01 蒼龍之刃 Dran Dagger 4-60R', 'HK$88.00', '9成新 (僅試轉過幾次，無明顯對戰撞痕，含原裝發射器與配件)', '9成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=UX-01+Dran+Dagger')">
+        <div class="img-wrapper">
+          <img class="product-img" src="https://via.placeholder.com/500x500/EAE8E3/333333?text=UX-01+Dran+Dagger" alt="UX-01 Dran Dagger">
         </div>
+        <div class="product-info">
+          <div class="product-title">「IN STOCK!」 BEYBLADE X UX-01 蒼龍之刃 Dran Dagger 4-60R</div>
+          <div class="product-price">HK$88.00</div>
+        </div>
+        <button class="btn-cart-icon" onclick="event.stopPropagation(); openModal('「IN STOCK!」 BEYBLADE X UX-01 蒼龍之刃 Dran Dagger 4-60R', 'HK$88.00', '9成新 (僅試轉過幾次，無明顯對戰撞痕，含原裝發射器與配件)', '9成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=UX-01+Dran+Dagger');">
+          <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
       </div>
 
       <!-- Product Card 2 -->
-      <div class="product-card" data-category="launcher" onclick="openModal('BX-18 黑白拉線發射器 String Launcher (二手)', 'HK$ 45.00', '85成新 (拉線順暢，功能完全正常，表面有些微使用痕跡)', '85成新', 'https://via.placeholder.com/400x400?text=BX-18+Launcher')">
-        <span class="badge used">二手良好</span>
-        <img class="product-img" src="https://via.placeholder.com/300x300?text=BX-18+Launcher" alt="String Launcher">
-        <div class="product-info">
-          <div class="product-title">BX-18 黑白拉線發射器 String Launcher</div>
-          <div class="product-price">HK$ 45.00</div>
-          <button class="btn-view">查看詳情</button>
+      <div class="product-card" data-category="launcher" onclick="openModal('「IN STOCK!」 BX-18 黑白拉線發射器 String Launcher', 'HK$45.00', '85成新 (拉線順暢，功能完全正常，表面有些微使用痕跡)', '85成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=BX-18+String+Launcher')">
+        <div class="img-wrapper">
+          <img class="product-img" src="https://via.placeholder.com/500x500/EAE8E3/333333?text=BX-18+String+Launcher" alt="BX-18 Launcher">
         </div>
+        <div class="product-info">
+          <div class="product-title">「IN STOCK!」 BX-18 黑白拉線發射器 String Launcher</div>
+          <div class="product-price">HK$45.00</div>
+        </div>
+        <button class="btn-cart-icon" onclick="event.stopPropagation(); openModal('「IN STOCK!」 BX-18 黑白拉線發射器 String Launcher', 'HK$45.00', '85成新 (拉線順暢，功能完全正常，表面有些微使用痕跡)', '85成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=BX-18+String+Launcher');">
+          <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
       </div>
 
-      <!-- Product Card 3 -->
-      <div class="product-card" data-category="like-new beyblade" onclick="openModal('BX-00 地獄鐮刀 Hells Scythe 4-60T 特別配色 (二手裸陀螺)', 'HK$ 120.00', '95成新 (收藏品出讓，金屬環無氧化，未用於正式對戰)', '95成新', 'https://via.placeholder.com/400x400?text=BX-00+HellsScythe')">
-        <span class="badge like-new">近全新</span>
-        <img class="product-img" src="https://via.placeholder.com/300x300?text=BX-00+HellsScythe" alt="Hells Scythe">
-        <div class="product-info">
-          <div class="product-title">BX-00 地獄鐮刀 Hells Scythe 4-60T</div>
-          <div class="product-price">HK$ 120.00</div>
-          <button class="btn-view">查看詳情</button>
+      <!-- Product Card 3 (Sold Out Example) -->
+      <div class="product-card" data-category="like-new beyblade" onclick="openModal('「PRE-ORDER!」 BX-00 地獄鐮刀 Hells Scythe 4-60T 特別配色', 'HK$120.00 ~ HK$160.00', '95成新 (收藏品出讓，金屬環無氧化，未用於正式對戰)', '95成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=BX-00+Hells+Scythe')">
+        <div class="img-wrapper">
+          <img class="product-img" src="https://via.placeholder.com/500x500/EAE8E3/333333?text=BX-00+Hells+Scythe" alt="BX-00 Hells Scythe">
+          <div class="sold-out-badge">SOLD OUT</div>
         </div>
+        <div class="product-info">
+          <div class="product-title">「PRE-ORDER!」 BX-00 地獄鐮刀 Hells Scythe 4-60T 特別配色</div>
+          <div class="product-price">
+            HK$120.00 ~ HK$160.00
+            <div class="original-price">HK$180.00</div>
+          </div>
+        </div>
+        <button class="btn-cart-icon" onclick="event.stopPropagation(); openModal('「PRE-ORDER!」 BX-00 地獄鐮刀 Hells Scythe 4-60T 特別配色', 'HK$120.00 ~ HK$160.00', '95成新 (收藏品出讓，金屬環無氧化，未用於正式對戰)', '95成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=BX-00+Hells+Scythe');">
+          <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
       </div>
 
       <!-- Product Card 4 -->
-      <div class="product-card" data-category="launcher" onclick="openModal('BEYBLADE X 發射器握把 Launcher Grip 黑色 (二手)', 'HK$ 30.00', '8成新 (扣位完好無鬆脫，正常戰鬥磨損)', '8成新', 'https://via.placeholder.com/400x400?text=Launcher+Grip')">
-        <span class="badge used">二手</span>
-        <img class="product-img" src="https://via.placeholder.com/300x300?text=Launcher+Grip" alt="Launcher Grip">
-        <div class="product-info">
-          <div class="product-title">發射器握把 Launcher Grip (黑色)</div>
-          <div class="product-price">HK$ 30.00</div>
-          <button class="btn-view">查看詳情</button>
+      <div class="product-card" data-category="launcher" onclick="openModal('「IN STOCK!」 BEYBLADE X 發射器握把 Launcher Grip (黑色)', 'HK$30.00', '8成新 (扣位完好無鬆脫，正常戰鬥磨損)', '8成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=Launcher+Grip')">
+        <div class="img-wrapper">
+          <img class="product-img" src="https://via.placeholder.com/500x500/EAE8E3/333333?text=Launcher+Grip" alt="Launcher Grip">
         </div>
+        <div class="product-info">
+          <div class="product-title">「IN STOCK!」 BEYBLADE X 發射器握把 Launcher Grip (黑色)</div>
+          <div class="product-price">HK$30.00</div>
+        </div>
+        <button class="btn-cart-icon" onclick="event.stopPropagation(); openModal('「IN STOCK!」 BEYBLADE X 發射器握把 Launcher Grip (黑色)', 'HK$30.00', '8成新 (扣位完好無鬆脫，正常戰鬥磨損)', '8成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=Launcher+Grip');">
+          <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
       </div>
 
       <!-- Product Card 5 -->
-      <div class="product-card" data-category="parts" onclick="openModal('BX 軸心 / 棘輪 散件單賣 (二手)', 'HK$ 15.00', '拆件單賣，多款可選，適合自行改裝補件。', '8成新', 'https://via.placeholder.com/400x400?text=Beyblade+Parts')">
-        <span class="badge used">散件</span>
-        <img class="product-img" src="https://via.placeholder.com/300x300?text=Beyblade+Parts" alt="Parts">
-        <div class="product-info">
-          <div class="product-title">BX 軸心 / 棘輪 特價散件單賣</div>
-          <div class="product-price">HK$ 15.00</div>
-          <button class="btn-view">查看詳情</button>
+      <div class="product-card" data-category="parts" onclick="openModal('「IN STOCK!」 BX 軸心 / 棘輪 特價散件單賣', 'HK$15.00', '拆件單賣，多款可選，適合自行改裝補件。', '8成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=Beyblade+Parts')">
+        <div class="img-wrapper">
+          <img class="product-img" src="https://via.placeholder.com/500x500/EAE8E3/333333?text=Beyblade+Parts" alt="Beyblade Parts">
         </div>
+        <div class="product-info">
+          <div class="product-title">「IN STOCK!」 BX 軸心 / 棘輪 特價散件單賣</div>
+          <div class="product-price">HK$15.00</div>
+        </div>
+        <button class="btn-cart-icon" onclick="event.stopPropagation(); openModal('「IN STOCK!」 BX 軸心 / 棘輪 特價散件單賣', 'HK$15.00', '拆件單賣，多款可選，適合自行改裝補件。', '8成新', 'https://via.placeholder.com/500x500/EAE8E3/333333?text=Beyblade+Parts');">
+          <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
       </div>
 
     </div>
@@ -538,11 +594,11 @@
       <div class="modal-details">
         <div>
           <div class="modal-title" id="mTitle">商品名稱</div>
-          <div class="modal-price" id="mPrice">HK$ 0.00</div>
+          <div class="modal-price" id="mPrice">HK$0.00</div>
           <div class="modal-condition" id="mCondition">成色狀況：85成新</div>
           <div class="modal-desc" id="mDesc">詳細描述預設文字...</div>
         </div>
-        <button class="btn-view" style="background:#25D366;" onclick="alert('請截圖聯絡賣家進行購買！')">📱 WhatsApp 查詢 / 購買</button>
+        <button class="btn-contact" onclick="alert('請截圖聯絡賣家進行購買！')">WhatsApp 查詢 / 購買</button>
       </div>
     </div>
   </div>
@@ -575,7 +631,7 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Drawer, Modal, & Filtering -->
+  <!-- JavaScript Controls -->
   <script>
     // Menu Drawer Controls
     function openDrawer() {
@@ -589,22 +645,21 @@
     }
 
     // Category Filter Functionality
-    function filterCategory(category, btnElement) {
+    function filterCategory(category) {
       const cards = document.querySelectorAll('.product-card');
+      let visibleCount = 0;
       
       cards.forEach(card => {
         const itemCategories = card.getAttribute('data-category').split(' ');
         if (category === 'all' || itemCategories.includes(category)) {
-          card.style.display = 'block';
+          card.style.display = 'flex';
+          visibleCount++;
         } else {
           card.style.display = 'none';
         }
       });
 
-      if (btnElement) {
-        document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-        btnElement.classList.add('active');
-      }
+      document.getElementById('itemCount').innerText = visibleCount + ' products';
     }
 
     // Modal Popup Controls
